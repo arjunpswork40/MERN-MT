@@ -3,7 +3,8 @@ Steps to follow.
 1.clone project
 2.go into 'client' directory
 3.npm install
-4.npm start
+4.npm run build
+5.npm start
 
 
 

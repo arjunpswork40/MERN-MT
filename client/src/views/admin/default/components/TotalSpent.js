@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 // Custom components
 import Card from "../../../../components/card/Card.js";
-import LineChart from "../../../../components/charts/LineChart";
+import LineChart from "../../../../components/charts/LineChart.js";
 import React from "react";
 import { IoCheckmarkCircle } from "react-icons/io5";
 import { MdBarChart, MdOutlineCalendarToday } from "react-icons/md";
@@ -23,8 +23,11 @@ import {
 export default function TotalSpent(props) {
   const { ...rest } = props;
 
-  // Chakra Color Mode
-
+  let detailValues = props.detailValues;
+  let chartData = [{
+    name: "Quantity",
+    data: props.stockDetailsForLineChart,
+  }]
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = useColorModeValue("secondaryGray.600", "white");
   const boxBg = useColorModeValue("secondaryGray.300", "whiteAlpha.100");
@@ -59,7 +62,7 @@ export default function TotalSpent(props) {
               color={textColorSecondary}
               me='4px'
             />
-            This month
+            Details
           </Button>
           <Button
             ms='auto'
@@ -86,7 +89,7 @@ export default function TotalSpent(props) {
             textAlign='start'
             fontWeight='700'
             lineHeight='100%'>
-            $37.5K
+            {detailValues.totalPrice}
           </Text>
           <Flex align='center' mb='20px'>
             <Text
@@ -95,12 +98,12 @@ export default function TotalSpent(props) {
               fontWeight='500'
               mt='4px'
               me='12px'>
-              Total Spent
+              Total Quantity
             </Text>
             <Flex align='center'>
               <Icon as={RiArrowUpSFill} color='green.500' me='2px' mt='2px' />
               <Text color='green.500' fontSize='sm' fontWeight='700'>
-                +2.45%
+                {detailValues.totalQuantity}
               </Text>
             </Flex>
           </Flex>
@@ -114,7 +117,7 @@ export default function TotalSpent(props) {
         </Flex>
         <Box minH='260px' minW='75%' mt='auto'>
           <LineChart
-            chartData={lineChartDataTotalSpent}
+            chartData={chartData}
             chartOptions={lineChartOptionsTotalSpent}
           />
         </Box>
